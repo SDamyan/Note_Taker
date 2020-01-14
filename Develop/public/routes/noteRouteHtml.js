@@ -1,9 +1,6 @@
-
-
 // Linking route to data source, the data source holds note information
 
 const noteDBVar = require("../db/db.json");
-
 
 // Routing
 

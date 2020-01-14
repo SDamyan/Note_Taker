@@ -21,8 +21,8 @@ app.use(express.json());
 // Directing the server to the route files. 
 //The routes give the server a map of how to res when users req data.
 
-require(".../routes/indexRouteHtml.js")(app);
-require(".../routes/noteRouteHtml.js")(app);
+require("../routes/indexRouteHtml.js")(app);
+require("../routes/noteRouteHtml.js")(app);
 
 
 // LISTENER
