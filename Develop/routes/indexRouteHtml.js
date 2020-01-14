@@ -1,35 +1,19 @@
-// Linking route to data source, the data source holds note information
-
-const noteDBVar = require("../db/db.json");
-
+// Including path package to get the correct file path for the html
+const path = require("path");
 
 // Routing
 
 module.exports = function(app) {
-  // API GET Requests
-  // Below code handles when users "visit" a page.
-
-  app.get("/api/notes", function(req, res) {
-    res.json(noteDBVar);
+  // HTML GET Requests
+  //When a user visits a page, the html coordinating html content is shown.
+  
+  app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
   });
 
-
-// API POST Requests
-  // Below code handles when a user addes a new note and thus submits data to the server.
-  // In each of the below cases, when a user submits note data (a JSON object)
-  // ...the JSON is pushed to db.json
-  // ---------------------------------------------------------------------------
-
-  app.post("/api/tables", function(req, res) {
-    // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
-    // It will do this by sending out the value "true" have a table
-    // req.body is available since we're using the body parsing middleware
-    if (tableData.length < 5) {
-      tableData.push(req.body);
-      res.json(true);
-    }
-    else {
-      waitListData.push(req.body);
-      res.json(false);
-    }
+  // If no matching route is found default to home
+  app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
+
+};
