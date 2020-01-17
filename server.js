@@ -15,14 +15,15 @@ const PORT = process.env.PORT || 8080;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(static)
 
 
 // ROUTER
 // Directing the server to the route files. 
 //The routes give the server a map of how to res when users req data.
 
-require("../routes/indexRouteHtml.js")(app);
-require("../routes/noteRouteHtml.js")(app);
+require("./routes/indexRouteHtml")(app);
+require("./routes/noteRouteHtml")(app);
 
 
 // LISTENER
