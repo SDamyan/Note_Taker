@@ -1,8 +1,8 @@
 // Linking route to data source, the data source holds note information
-
 const noteDBVar = require("../db/db.js");
 const fs = require("fs");
 const path = require("path");
+
 // Routing
 
 module.exports = function(app) {
@@ -15,20 +15,18 @@ module.exports = function(app) {
 
 
 // API POST Requests
-  // Below code handles when a user addes a new note and thus submits data to the server.
-  // In each of the below cases, when a user submits note data (a JSON object)
-  // ...the JSON is pushed to db.json
+  // Below code handles when a user adds a new note and thereby submits data to the server.
+  // When a user submits note data (a JSON object)...the JSON is pushed to db.json
 
   app.post("/api/notes", function(req, res) {
       noteDBVar.push(req.body);
       res.json(true);
       console.log(noteDBVar)
-  
   }); 
 
 
 //API DELETE Requests
-//used the .filter method here to delete an unwanted note by it's id and create a new array.
+//used the .filter method here to delete an unwanted note by it's ID and create a new array.
  app.delete("/api/notes/:id", function (req,res) {
   let newArray = getDatabase();
   
@@ -36,7 +34,6 @@ module.exports = function(app) {
    res.json(newArray);
 
   function saveDatabase (newArray);
-
  });
 };
 
