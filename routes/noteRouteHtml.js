@@ -1,5 +1,5 @@
 // Linking route to data source, the data source holds note information
-const noteDBVar = require("../db/db.js");
+// const noteDBVar = require("../db/db.js");
 const fs = require("fs");
 const path = require("path");
 
@@ -10,7 +10,8 @@ module.exports = function(app) {
   // Below code handles when users "visit" a page.
 
   app.get("/api/notes", function(req, res) {
-    res.json(noteDBVar);
+    res.json(getDatabase());
+    console.log(getDatabase());
   });
 
 
@@ -19,9 +20,14 @@ module.exports = function(app) {
   // When a user submits note data (a JSON object)...the JSON is pushed to db.json
 
   app.post("/api/notes", function(req, res) {
-      noteDBVar.push(req.body);
-      res.json(true);
-      console.log(noteDBVar)
+      //reading the file
+      const database = getDatabase();
+      //modifying the file
+      req.body.id = Math.floor(Math.random()*1000);
+      database.push(req.body);
+      //saving new file
+      saveDatabase (database);
+      res.send("Successfully updated");
   }); 
 
 
@@ -33,7 +39,7 @@ module.exports = function(app) {
   newArray = newArray.filter(note => note.id != req.params.id)
    res.json(newArray);
 
-  function saveDatabase (newArray);
+  saveDatabase (newArray);
  });
 };
 
